@@ -68,12 +68,12 @@ public class DataMMSP {
     }
 
     /**
-     * @param indexOfDimension index of needed dimension
+     * @param index index of needed dimension
      * @return List of data for dimension, null if this dataset not created
      */
-    public List<Double> getDataset(int indexOfDimension) {
+    public List<Double> getDataset(int index) {
         try {
-            return data.get(indexOfDimension);
+            return data.get(index);
         } catch (IndexOutOfBoundsException e) {
             return null;
         }
