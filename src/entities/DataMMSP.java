@@ -99,4 +99,11 @@ public class DataMMSP {
         }
         this.data.add(index, dset);
     }
+
+    /**
+     * @param datasets - array of generated data
+     */
+    public void addDatasets(List<List<Double>> datasets){
+        this.data = datasets;
+    }
 }
