@@ -103,7 +103,41 @@ public class DataMMSP {
     /**
      * @param datasets - array of generated data
      */
-    public void addDatasets(List<List<Double>> datasets){
+    public void addDatasets(List<List<Double>> datasets) {
         this.data = datasets;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < (data.size() > dimensions.size() ? data.size() : dimensions.size()); i++) {
+            try {
+                res.append(dimensions.get(i));
+                res.append(":");
+            } catch (IndexOutOfBoundsException e) {
+                res.append("null");
+            } finally {
+                res.append("\t");
+            }
+            try {
+                for (double d : data.get(i)) {
+                    res.append(round(d,2) );
+                    res.append(",\t");
+                }
+            } catch (IndexOutOfBoundsException e) {
+                res.append("null");
+            } finally {
+                res.append("\n");
+            }
+        }
+        return res.toString();
+    }
+
+    private double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
     }
 }
