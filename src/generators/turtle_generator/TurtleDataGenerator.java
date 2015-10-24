@@ -18,8 +18,8 @@ public class TurtleDataGenerator implements DataGeneratorInterface {
     private DataMMSP data;
     private TurtleAlgorithmParameters turtleParameters;
 
-    public TurtleDataGenerator(TurtleAlgorithmParameters turtleParameters) {
-        this.turtleParameters = turtleParameters;
+    public TurtleDataGenerator(TurtleAlgorithmParameters parameters){
+        this.turtleParameters = parameters;
         data = new DataMMSP();
         data.setDimensions(new String[]{"x", "y"});
     }
@@ -37,7 +37,7 @@ public class TurtleDataGenerator implements DataGeneratorInterface {
         y_list.add(0d);
         double[] h = new double[]{0,0};
         Stack<StackDataTemplate> stack = new Stack<>();
-        String resStr = generateResultString();
+        String resStr = turtleParameters.generate();
         for (int i = 0; i < resStr.length(); i++) {
             switch (resStr.charAt(i)) {
                 case '+':
@@ -68,28 +68,6 @@ public class TurtleDataGenerator implements DataGeneratorInterface {
         res.add(x_list);
         res.add(y_list);
         data.addDatasets(res);
-    }
-
-    private String generateResultString() {
-        StringBuilder res = new StringBuilder();
-        String start = turtleParameters.getStart();
-        for (int i = 0; i < turtleParameters.getCountI(); i++) {
-            if (i > 0) start = res.toString();
-            res.setLength(0);
-            for (int j = 0; j < start.length(); j++) {
-                switch (start.charAt(j)) {
-                    case 'F':
-                        res.append(turtleParameters.getRuleF());
-                        break;
-                    case 'b':
-                        res.append(turtleParameters.getRuleB());
-                        break;
-                    default:
-                        res.append(start.charAt(j));
-                }
-            }
-        }
-        return res.toString();
     }
 
     private class StackDataTemplate {

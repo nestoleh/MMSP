@@ -11,11 +11,11 @@ public interface DataGeneratorInterface {
     /**
      * @return generated dataset, if data not generated return null
      */
-    public DataMMSP getData();
+    DataMMSP getData();
 
 
     /**
      * Generate data
      */
-    public void generate();
+    void generate();
 }

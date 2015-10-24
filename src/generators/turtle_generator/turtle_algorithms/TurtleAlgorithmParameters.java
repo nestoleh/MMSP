@@ -1,5 +1,12 @@
 package generators.turtle_generator.turtle_algorithms;
 
+import entities.Rule;
+import generators.turtle_generator.StringGenerator;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Set of parameters for turtle algorithm
  * Created by Oleg on 24.10.2015.
@@ -9,22 +16,28 @@ public class TurtleAlgorithmParameters {
     private double theta;
     private double alpha;
     private String start;
-    private String ruleF;
-    private String ruleB;
-    private int countI;
+    private int iterations;
+    Map<String, String> rules = new HashMap<>();
+    public StringGenerator generator;
 
-    public TurtleAlgorithmParameters(double theta, double alpha, String start, String ruleF, String ruleB) {
+    public TurtleAlgorithmParameters(double theta, int alpha, String start, List<Rule> rules, StringGenerator generator) {
+        this.generator = generator;
         setTheta(theta);
         setAlpha(alpha);
         setStart(start);
-        setRuleF(ruleF);
-        setRuleB(ruleB);
-        countI = 1;
+        for (Rule rule : rules) {
+            addRule(rule);
+        }
     }
 
-    public TurtleAlgorithmParameters(double theta, double alpha, String start, String ruleF, String ruleB, int countI) {
-        this(theta, alpha, start, ruleF, ruleB);
-        setCountI(countI);
+    public void addRule(Rule rule){
+        rules.put(rule.name, rule.rule);
+    }
+
+    public String getRule(String name){
+        if (rules.keySet().contains(name))
+            return rules.get(name);
+        return "";
     }
 
     public void setTheta(double theta) {
@@ -43,27 +56,11 @@ public class TurtleAlgorithmParameters {
         }
     }
 
-    public void setRuleF(String ruleF) {
-        if (ruleF == null) {
-            this.ruleF = "";
+    public void setIterations(int iterations) {
+        if (iterations < 1) {
+            this.iterations = 1;
         } else {
-            this.ruleF = ruleF;
-        }
-    }
-
-    public void setRuleB(String ruleB) {
-        if (ruleB == null) {
-            this.ruleB = "";
-        } else {
-            this.ruleB = ruleB;
-        }
-    }
-
-    public void setCountI(int countI) {
-        if (countI < 1) {
-            this.countI = 1;
-        } else {
-            this.countI = countI;
+            this.iterations = iterations;
         }
     }
 
@@ -79,15 +76,16 @@ public class TurtleAlgorithmParameters {
         return start;
     }
 
-    public String getRuleF() {
-        return ruleF;
+    public int getIterations() {
+        return iterations;
     }
 
-    public String getRuleB() {
-        return ruleB;
-    }
 
-    public int getCountI() {
-        return countI;
+    /**
+     * Appplying rules to string
+     * @return formed to calculate string
+     */
+    public String generate() {
+        return generator.generate(getStart(), this);
     }
 }
