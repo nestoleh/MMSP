@@ -1,7 +1,6 @@
 package generators.turtle_generator.turtle_algorithms;
 
 import entities.Rule;
-import generators.turtle_generator.StringGenerator;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,10 +17,8 @@ public class TurtleAlgorithmParameters {
     private String start;
     private int iterations;
     Map<String, String> rules = new HashMap<>();
-    public StringGenerator generator;
 
-    public TurtleAlgorithmParameters(double theta, int alpha, String start, List<Rule> rules, StringGenerator generator) {
-        this.generator = generator;
+    public TurtleAlgorithmParameters(double theta, int alpha, String start, List<Rule> rules) {
         setTheta(theta);
         setAlpha(alpha);
         setStart(start);
@@ -37,7 +34,7 @@ public class TurtleAlgorithmParameters {
     public String getRule(String name){
         if (rules.keySet().contains(name))
             return rules.get(name);
-        return "";
+        return name;
     }
 
     public void setTheta(double theta) {
@@ -86,6 +83,17 @@ public class TurtleAlgorithmParameters {
      * @return formed to calculate string
      */
     public String generate() {
-        return generator.generate(getStart(), this);
+        StringBuilder res = new StringBuilder();
+        String start = getStart();
+        for (int i = 0; i < getIterations(); i++) {
+            if (i > 0)
+                start = res.toString();
+            res.setLength(0);
+            for (int j = 0; j < start.length(); j++) {
+                String ch = String.valueOf(start.charAt(j));
+                res.append(getRule(ch));
+            }
+        }
+        return res.toString();
     }
 }

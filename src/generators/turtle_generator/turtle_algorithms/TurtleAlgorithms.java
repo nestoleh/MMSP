@@ -1,8 +1,6 @@
 package generators.turtle_generator.turtle_algorithms;
 
 import entities.Rule;
-import generators.turtle_generator.stringGenerators.ChainStringGenerator;
-import generators.turtle_generator.stringGenerators.SpiralStringGenerator;
 
 import java.util.Arrays;
 
@@ -19,8 +17,7 @@ public enum TurtleAlgorithms {
                     "F+F+F+F",
                     Arrays.asList(
                             new Rule("F", "F+b-F-FFF+F+b-F"),
-                            new Rule("b", "bbb")),
-                    new ChainStringGenerator()
+                            new Rule("b", "bbb"))
             );
         }
     },
@@ -35,8 +32,7 @@ public enum TurtleAlgorithms {
                     Arrays.asList(
                             new Rule("A", "X+X+X+X+X+X+"),
                             new Rule("X", "[F+F+F+F[--X-Y]+++++F++++++++F-F-F-F"),
-                            new Rule("Y", "[F+F+F+F[--Y]+++++F++++++++F-F-F-F")),
-                    new SpiralStringGenerator()
+                            new Rule("Y", "[F+F+F+F[--Y]+++++F++++++++F-F-F-F"))
             );
         }
     };
