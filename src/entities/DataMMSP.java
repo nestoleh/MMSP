@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static utils.Util.round;
+
 /**
  * Class for save datasets for all dimensions
  * Created by Oleg on 24.10.2015.
@@ -133,11 +135,4 @@ public class DataMMSP {
         return res.toString();
     }
 
-    private double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
-        long factor = (long) Math.pow(10, places);
-        value = value * factor;
-        long tmp = Math.round(value);
-        return (double) tmp / factor;
-    }
 }
