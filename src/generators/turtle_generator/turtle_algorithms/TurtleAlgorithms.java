@@ -9,6 +9,7 @@ import java.util.Arrays;
  * Created by Oleg on 24.10.2015.
  */
 public enum TurtleAlgorithms {
+    // variant 10
     CHAIN {
         public TurtleAlgorithmParameters getParameters() {
             return new TurtleAlgorithmParameters(
