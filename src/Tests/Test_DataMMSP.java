@@ -1,8 +1,11 @@
 package Tests;
 
 import entities.DataMMSP;
+import generators.turtle_generator.turtle_algorithms.TurtleAlgorithmParameters;
+import generators.turtle_generator.turtle_algorithms.TurtleAlgorithms;
 import org.junit.Assert;
 import org.junit.Test;
+import utils.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +18,13 @@ import java.util.Random;
 public class Test_DataMMSP {
 
     DataMMSP dataMMSP = new DataMMSP();
+
+    @Test
+    public void testRounding(){
+        Assert.assertEquals(2.34, Util.round(2.336346, 2), 0);
+        Assert.assertEquals(2.34, Util.round(2.34346, 2), 0);
+        Assert.assertEquals(2.343, Util.round(2.34346, 3), 0);
+    }
 
     @Test
     public void testDimensions1() {
@@ -65,5 +75,30 @@ public class Test_DataMMSP {
         dataMMSP.addDatasets(tmp);
         Assert.assertEquals(tmp, dataMMSP.getAllDatasets());
         Assert.assertEquals(tmp.get(2),dataMMSP.getDataset(2));
+    }
+
+
+    @Test
+    public void testChainGenerator(){
+        TurtleAlgorithmParameters parameters = TurtleAlgorithms.CHAIN.getParameters();
+        parameters.setIterations(1);
+        String generate = parameters.generate();
+        Assert.assertEquals("F+b-F-FFF+F+b-F+F+b-F-FFF+F+b-F+F+b-F-FFF+F+b-F+F+b-F-FFF+F+b-F", generate);
+    }
+
+    @Test
+    public void testSpiralGenerator(){
+        TurtleAlgorithmParameters parameters = TurtleAlgorithms.SPIRAL_COVER.getParameters();
+        parameters.setIterations(2);
+        String generate = parameters.generate();
+        Assert.assertEquals("[F+F+F+F[--X-Y]+++++F++++++++F-F-F-F+[F+F+F+F[--X-Y]+++++F++++++++F-F-F-F+[F+F+F+F[--X-Y]" +
+                "+++++F++++++++F-F-F-F+[F+F+F+F[--X-Y]+++++F++++++++F-F-F-F+[F+F+F+F[--X-Y]+++++F++++++++F-F-F-F+[F+F+F" +
+                "+F[--X-Y]+++++F++++++++F-F-F-F+[F+F+F+F[--X-Y]+++++F++++++++F-F-F-F+[F+F+F+F[--X-Y]+++++F++++++++F-F-F" +
+                "-F+[F+F+F+F[--X-Y]+++++F++++++++F-F-F-F+[F+F+F+F[--X-Y]+++++F++++++++F-F-F-F+[F+F+F+F[--X-Y]+++++F+++++" +
+                "+++F-F-F-F+[F+F+F+F[--X-Y]+++++F++++++++F-F-F-F+[F+F+F+F[--X-Y]+++++F++++++++F-F-F-F+[F+F+F+F[--X-Y]+++" +
+                "++F++++++++F-F-F-F+[F+F+F+F[--X-Y]+++++F++++++++F-F-F-F+[F+F+F+F[--X-Y]+++++F++++++++F-F-F-F+[F+F+F+F[-" +
+                "-X-Y]+++++F++++++++F-F-F-F+[F+F+F+F[--X-Y]+++++F++++++++F-F-F-F+[F+F+F+F[--X-Y]+++++F++++++++F-F-F-F+[F" +
+                "+F+F+F[--X-Y]+++++F++++++++F-F-F-F+[F+F+F+F[--X-Y]+++++F++++++++F-F-F-F+[F+F+F+F[--X-Y]+++++F++++++++F-F" +
+                "-F-F+[F+F+F+F[--X-Y]+++++F++++++++F-F-F-F+[F+F+F+F[--X-Y]+++++F++++++++F-F-F-F+", generate);
     }
 }

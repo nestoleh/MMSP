@@ -1,15 +1,15 @@
 package utils;
 
+import java.math.BigDecimal;
+
 /**
  * Created by Oleg on 07.11.2015.
  */
 public class Util {
 
     public static double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
-        long factor = (long) Math.pow(10, places);
-        value = value * factor;
-        long tmp = Math.round(value);
-        return (double) tmp / factor;
+        return new BigDecimal(value)
+                .setScale(places, BigDecimal.ROUND_HALF_UP)
+                .doubleValue();
     }
 }

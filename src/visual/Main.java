@@ -1,3 +1,5 @@
+package visual;
+
 import entities.DataMMSP;
 import entities.DifferenceRange;
 import generators.DataGeneratorInterface;
@@ -13,16 +15,8 @@ import static java.util.Collections.*;
 public class Main {
 
     public static void main(String[] args) throws IllegalAccessException, InstantiationException {
-        // STEP 0: Chose your algorithm
-        TurtleAlgorithmParameters parameters = TurtleAlgorithms.SPIRAL_COVER.getParameters();
-        parameters.setIterations(5);// set iterations count
 
-        // STEP 1: Create your generator
-        DataGeneratorInterface generator = new TurtleDataGenerator(parameters);
-
-        // STEP 3: Generate data
-        generator.generate();
-        DataMMSP data = generator.getData();
+        DataMMSP data = getData();
 
         // STEP 4: show your data
         System.out.println("START DATA:");
@@ -40,5 +34,19 @@ public class Main {
         sort(differenceRanges.get(0).getRange());
         System.out.println(differenceRanges.get(0));
     }
+
+    public static DataMMSP getData(){
+        // STEP 0: Chose your algorithm
+        TurtleAlgorithmParameters parameters = TurtleAlgorithms.SPIRAL_COVER.getParameters();
+        parameters.setIterations(4);// set iterations count
+
+        // STEP 1: Create your generator
+        DataGeneratorInterface generator = new TurtleDataGenerator(parameters);
+
+        // STEP 3: Generate data
+        generator.generate();
+        return generator.getData();
+    }
+
 }
 
