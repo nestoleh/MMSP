@@ -1,5 +1,6 @@
 package visual;
 
+import com.sun.xml.internal.ws.util.Pool;
 import entities.DataMMSP;
 import entities.DifferenceRange;
 import generators.DataGeneratorInterface;
@@ -16,7 +17,7 @@ public class Main {
 
     public static void main(String[] args) throws IllegalAccessException, InstantiationException {
 
-        DataMMSP data = getData();
+        DataMMSP data = getData(3, TurtleAlgorithms.SPIRAL_COVER.toString());
 
         // STEP 4: show your data
         System.out.println("START DATA:");
@@ -35,10 +36,10 @@ public class Main {
         System.out.println(differenceRanges.get(0));
     }
 
-    public static DataMMSP getData(){
+    public static DataMMSP getData(int iterations, String algorithm){
         // STEP 0: Chose your algorithm
-        TurtleAlgorithmParameters parameters = TurtleAlgorithms.SPIRAL_COVER.getParameters();
-        parameters.setIterations(4);// set iterations count
+        TurtleAlgorithmParameters parameters = TurtleAlgorithms.valueOf(algorithm).getParameters();
+        parameters.setIterations(iterations);// set iterations count
 
         // STEP 1: Create your generator
         DataGeneratorInterface generator = new TurtleDataGenerator(parameters);
