@@ -24,8 +24,8 @@ public class DifferenceGenerator {
         DifferenceRange range = new DifferenceRange();
         range.setRangeLabel(label);
         List<Double> rangeList = new ArrayList<>();
-        for (int i = 0; i < dataset.size()-1; i++) {
-            rangeList.add(dataset.get(i+1)-dataset.get(i));
+        for (int i = 0; i < dataset.size()-4; i++) {
+            rangeList.add(dataset.get(i+4)-dataset.get(i));
         }
         range.setRange(rangeList);
         return range;

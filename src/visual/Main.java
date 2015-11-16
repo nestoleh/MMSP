@@ -1,23 +1,26 @@
 package visual;
 
-import com.sun.xml.internal.ws.util.Pool;
+import alphabets.Alphabet;
 import entities.DataMMSP;
 import entities.DifferenceRange;
+import entities.IntervalRule;
 import generators.DataGeneratorInterface;
 import generators.DifferenceGenerator;
 import generators.turtle_generator.TurtleDataGenerator;
 import generators.turtle_generator.turtle_algorithms.TurtleAlgorithmParameters;
 import generators.turtle_generator.turtle_algorithms.TurtleAlgorithms;
+import intervals.EquivalentInterval;
+import intervals.IntervalInterface;
 
 import java.util.List;
 
-import static java.util.Collections.*;
+import static java.util.Collections.sort;
 
 public class Main {
 
     public static void main(String[] args) throws IllegalAccessException, InstantiationException {
 
-        DataMMSP data = getData(3, TurtleAlgorithms.SPIRAL_COVER.toString());
+        DataMMSP data = getData(3, TurtleAlgorithms.CHAIN.toString());
 
         // STEP 4: show your data
         System.out.println("START DATA:");
@@ -31,12 +34,14 @@ public class Main {
         }
         System.out.println();
 
-        //
-        sort(differenceRanges.get(0).getRange());
-        System.out.println(differenceRanges.get(0));
+        // STEP 6: create rules for x line
+        IntervalInterface interval = new EquivalentInterval(Alphabet.SMALL_ENGLISH, differenceRanges.get(0));
+        IntervalRule intervalRule_x = interval.getIntervalRule();
+        System.out.println(intervalRule_x.toString());
+
     }
 
-    public static DataMMSP getData(int iterations, String algorithm){
+    public static DataMMSP getData(int iterations, String algorithm) {
         // STEP 0: Chose your algorithm
         TurtleAlgorithmParameters parameters = TurtleAlgorithms.valueOf(algorithm).getParameters();
         parameters.setIterations(iterations);// set iterations count
