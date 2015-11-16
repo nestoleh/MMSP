@@ -4,6 +4,7 @@ import alphabets.Alphabet;
 import entities.DataMMSP;
 import entities.DifferenceRange;
 import entities.IntervalRule;
+import entities.Table;
 import generators.DataGeneratorInterface;
 import generators.DifferenceGenerator;
 import generators.turtle_generator.TurtleDataGenerator;
@@ -13,8 +14,6 @@ import intervals.EquivalentInterval;
 import intervals.IntervalInterface;
 
 import java.util.List;
-
-import static java.util.Collections.sort;
 
 public class Main {
 
@@ -34,10 +33,35 @@ public class Main {
         }
         System.out.println();
 
-        // STEP 6: create rules for x line
+        // STEP 6: create rules for  lines
         IntervalInterface interval = new EquivalentInterval(Alphabet.SMALL_ENGLISH, differenceRanges.get(0));
+        // x-line
         IntervalRule intervalRule_x = interval.getIntervalRule();
+        System.out.println("\nInterval X:");
         System.out.println(intervalRule_x.toString());
+        // y-line
+        interval.setDiffrenceRange(differenceRanges.get(1));
+        IntervalRule intervalRule_y = interval.getIntervalRule();
+        System.out.println("Interval Y:");
+        System.out.println(intervalRule_y.toString());
+
+        // STEP 7: generate alphabet line
+        String line_x = intervalRule_x.generateAlphabetLine(differenceRanges.get(0).getRange());
+        System.out.println("\nLINE X:");
+        System.out.println(line_x);
+        String line_y = intervalRule_y.generateAlphabetLine(differenceRanges.get(1).getRange());
+        System.out.println("LINE Y:");
+        System.out.println(line_y);
+
+        // STEP 8: generate table
+        // table x
+        Table table_x = new Table(Alphabet.SMALL_ENGLISH, line_x);
+        System.out.println("\n TABLE X:");
+        System.out.println(table_x.toString());
+        // table y
+        Table table_y = new Table(Alphabet.SMALL_ENGLISH, line_y);
+        System.out.println("\n TABLE Y:");
+        System.out.println(table_y.toString());
 
     }
 

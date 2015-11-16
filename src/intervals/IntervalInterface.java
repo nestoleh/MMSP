@@ -1,5 +1,6 @@
 package intervals;
 
+import entities.DifferenceRange;
 import entities.IntervalRule;
 
 /**
@@ -8,5 +9,6 @@ import entities.IntervalRule;
 public interface IntervalInterface {
 
     public IntervalRule getIntervalRule();
+    public void setDiffrenceRange(DifferenceRange diffrenceRange);
 
 }

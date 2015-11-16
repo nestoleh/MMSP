@@ -43,6 +43,12 @@ public class EquivalentInterval implements IntervalInterface {
         return intervalRule;
     }
 
+    @Override
+    public void setDiffrenceRange(DifferenceRange diffrenceRange) {
+        this.differenceRange = diffrenceRange;
+
+    }
+
     private void diffByAlphabet(List<Double> list, String alp) {
         double min = Collections.min(list);
         double max = Collections.max(list);

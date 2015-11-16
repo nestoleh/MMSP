@@ -18,6 +18,18 @@ public class IntervalRule {
 
     }
 
+    public String generateAlphabetLine(List<Double> dRange){
+        StringBuilder line = new StringBuilder();
+        for (double item: dRange) {
+            for (IntervalItem rule: rules){
+                if (item >= rule.min && item < rule.max){
+                    line.append(rule.letter);
+                }
+            }
+        }
+        return line.toString();
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
