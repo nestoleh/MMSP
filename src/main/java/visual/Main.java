@@ -10,6 +10,7 @@ import generators.turtle_generator.turtle_algorithms.TurtleAlgorithms;
 import intervals.EquivalentInterval;
 import intervals.IntervalInterface;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -64,14 +65,38 @@ public class Main {
         // table x
         Table table_x = new Table(Alphabet.SMALL_ENGLISH, line_x);
         System.out.println("\n TABLE X:");
-        System.out.println(table_x.toString());
-        webContent.tableX = table_x.toString();
+        System.out.println(table_x.tableToString());
+        webContent.tableX = table_x.tableToString();
         // table y
         Table table_y = new Table(Alphabet.SMALL_ENGLISH, line_y);
         System.out.println("\n TABLE Y:");
-        System.out.println(table_y.toString());
-        webContent.tableY = table_y.toString();
+        System.out.println(table_y.tableToString());
+        webContent.tableY = table_y.tableToString();
 
+        // STEP 9: Frequency table
+        System.out.println("\n Frequency TABLE X:");
+        System.out.println(table_x.frequencyTableToString());
+        webContent.tableX = table_x.frequencyTableToString();
+        System.out.println("\n Frequency TABLE Y:");
+        System.out.println(table_y.frequencyTableToString());
+        webContent.tableX = table_y.frequencyTableToString();
+
+        // STEP 10: generate lingua rules
+        System.out.println("\n LINGUA RULES X:");
+        ArrayList<LinguaRule> x_rules= table_x.generateLinguaRules();
+        x_rules.forEach(linguaRule -> {
+            if (linguaRule.getP() > 0){
+                System.out.println(linguaRule.toString());
+            }
+        });
+
+        System.out.println("\n LINGUA RULES Y:");
+        ArrayList<LinguaRule> y_rules= table_y.generateLinguaRules();
+        y_rules.forEach(linguaRule -> {
+            if (linguaRule.getP() > 0){
+                System.out.println(linguaRule.toString());
+            }
+        });
 
         return webContent;
     }
