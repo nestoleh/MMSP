@@ -21,7 +21,7 @@ public class WebStart {
         Spark.port(8081);
         Spark.staticFileLocation("/public");
         Spark.get("/", (req, res) -> {
-            setUp("2", "chain");
+            setUp("2", "10");
             String html = WebContent.getPageHeader()+ rgr.getWebContent() + WebContent.getPageFooter();
             return html;
         });
