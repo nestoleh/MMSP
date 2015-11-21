@@ -20,7 +20,7 @@ public class WebContent {
                 .replaceAll("\t","</td><td>")
                 .replaceAll("\n","</td></tr><tr><td>") +"</table><br><br>";
 
-        return intervalX + "<br>"+intervalY + "<br><br>"
+        return intervalX + "<br><br>"+intervalY + "<br><br>"
                 + lineX + "<br><br>"+ lineY  +"<br><br>"+tabx + taby;
 
     }
