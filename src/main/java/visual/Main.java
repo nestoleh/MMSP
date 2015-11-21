@@ -1,10 +1,7 @@
 package visual;
 
 import alphabets.Alphabet;
-import entities.DataMMSP;
-import entities.DifferenceRange;
-import entities.IntervalRule;
-import entities.Table;
+import entities.*;
 import generators.DataGeneratorInterface;
 import generators.DifferenceGenerator;
 import generators.turtle_generator.TurtleDataGenerator;
@@ -19,6 +16,12 @@ public class Main {
 
     public static void main(String[] args) throws IllegalAccessException, InstantiationException {
 
+        start();
+
+    }
+
+    public static WebContent start() {
+        WebContent webContent = new WebContent();
         DataMMSP data = getData(3, TurtleAlgorithms.CHAIN.toString());
 
         // STEP 4: show your data
@@ -38,19 +41,23 @@ public class Main {
         // x-line
         IntervalRule intervalRule_x = interval.getIntervalRule();
         System.out.println("\nInterval X:");
+        webContent.intervalX = intervalRule_x.toWeb();
         System.out.println(intervalRule_x.toString());
         // y-line
         interval.setDiffrenceRange(differenceRanges.get(1));
         IntervalRule intervalRule_y = interval.getIntervalRule();
         System.out.println("Interval Y:");
+        webContent.intervalY = intervalRule_y.toWeb();
         System.out.println(intervalRule_y.toString());
 
         // STEP 7: generate alphabet line
         String line_x = intervalRule_x.generateAlphabetLine(differenceRanges.get(0).getRange());
         System.out.println("\nLINE X:");
         System.out.println(line_x);
+        webContent.lineX = line_x;
         String line_y = intervalRule_y.generateAlphabetLine(differenceRanges.get(1).getRange());
         System.out.println("LINE Y:");
+        webContent.lineY = line_y;
         System.out.println(line_y);
 
         // STEP 8: generate table
@@ -58,11 +65,15 @@ public class Main {
         Table table_x = new Table(Alphabet.SMALL_ENGLISH, line_x);
         System.out.println("\n TABLE X:");
         System.out.println(table_x.toString());
+        webContent.tableX = table_x.toString();
         // table y
         Table table_y = new Table(Alphabet.SMALL_ENGLISH, line_y);
         System.out.println("\n TABLE Y:");
         System.out.println(table_y.toString());
+        webContent.tableY = table_y.toString();
 
+
+        return webContent;
     }
 
     public static DataMMSP getData(int iterations, String algorithm) {
