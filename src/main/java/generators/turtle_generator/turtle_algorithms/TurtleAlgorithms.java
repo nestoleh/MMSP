@@ -39,4 +39,17 @@ public enum TurtleAlgorithms {
     };
 
     public abstract TurtleAlgorithmParameters getParameters();
+
+    public static TurtleAlgorithms getAlgorithm(int variant) {
+        TurtleAlgorithms algorithms = null;
+        switch (variant){
+            case 19:
+                algorithms = SPIRAL_COVER;
+                break;
+            case 10:
+                algorithms = CHAIN;
+                break;
+        }
+        return algorithms;
+    }
 }

@@ -21,21 +21,32 @@ public class WebStart {
         Spark.port(8081);
         Spark.staticFileLocation("/public");
         Spark.get("/", (req, res) -> {
-            setUp();
+            setUp("2", "chain");
             String html = WebContent.getPageHeader()+ rgr.getWebContent() + WebContent.getPageFooter();
             return html;
         });
+        Spark.get("/:iter/:var", (req, res) -> {
+            String iter = req.params(":iter");
+            String variant = req.params(":var");
+            boolean done = setUp(iter, variant);
+            if (!done)
+                return "No such algorithm";
+            return WebContent.getPageHeader()+ rgr.getWebContent() + WebContent.getPageFooter();
+        });
     }
 
-    private static void setUp() {
-        DataGeneratorInterface dataGenerator = setUpTurtleGenerator(3, TurtleAlgorithms.CHAIN.toString());                  // generator
+    private static boolean setUp(String iter, String variant) {
+        TurtleAlgorithms algorithm = TurtleAlgorithms.getAlgorithm(Integer.valueOf(variant));
+        if (algorithm == null)
+            return false;
+        DataGeneratorInterface dataGenerator = setUpTurtleGenerator(Integer.valueOf(iter), algorithm);                  // generator
         IntervalInterface interval = new EquivalentInterval();                                                              // interval
-
         rgr = new RGR(dataGenerator, interval, Alphabet.SMALL_ENGLISH);
+        return true;
     }
 
-    private static DataGeneratorInterface setUpTurtleGenerator(int iterations, String algorithm) {
-        TurtleAlgorithmParameters parameters = TurtleAlgorithms.valueOf(algorithm).getParameters();
+    private static DataGeneratorInterface setUpTurtleGenerator(int iterations, TurtleAlgorithms algorithm) {
+        TurtleAlgorithmParameters parameters = algorithm.getParameters();
         parameters.setIterations(iterations);
         DataGeneratorInterface generator = new TurtleDataGenerator(parameters);
         return generator;
