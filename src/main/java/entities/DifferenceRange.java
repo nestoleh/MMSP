@@ -32,7 +32,7 @@ public class DifferenceRange {
 
     @Override
     public String toString() {
-        StringBuilder res = new StringBuilder(rangeLabel + '\t');
+        StringBuilder res = new StringBuilder(rangeLabel.toUpperCase() + " => \t");
         for (double d : range) {
             res.append(round(d, 2));
             res.append(",\t");

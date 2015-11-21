@@ -19,11 +19,13 @@ public class EquivalentInterval implements IntervalInterface {
     public EquivalentInterval(Alphabet alphabet, DifferenceRange differenceRange) {
         this.alphabet = alphabet;
         this.differenceRange = differenceRange;
-        intervalRule = new IntervalRule();
     }
+
+    public EquivalentInterval() { }
 
     @Override
     public IntervalRule getIntervalRule() {
+        intervalRule = new IntervalRule();
         Set<Double> unique_1 = new HashSet<>();
         Set<Double> unique_2 = new HashSet<>();
         for (double item : differenceRange.getRange()) {
@@ -47,6 +49,11 @@ public class EquivalentInterval implements IntervalInterface {
     public void setDiffrenceRange(DifferenceRange diffrenceRange) {
         this.differenceRange = diffrenceRange;
 
+    }
+
+    @Override
+    public void setAlphabet(Alphabet alphabet) {
+        this.alphabet = alphabet;
     }
 
     private void diffByAlphabet(List<Double> list, String alp) {

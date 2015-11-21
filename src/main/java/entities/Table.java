@@ -91,7 +91,7 @@ public class Table {
         ArrayList<LinguaRule> rules = new ArrayList<>();
         for (int i = 0; i < frequencyTable.length; i++) {
             for (int j = 0; j < frequencyTable.length; j++) {
-                rules.add(new LinguaRule(tableCaption.get(j),tableCaption.get(i),frequencyTable[i][j]));
+                rules.add(new LinguaRule(tableCaption.get(i),tableCaption.get(j),frequencyTable[i][j]));
             }
         }
         return rules;
@@ -129,4 +129,7 @@ public class Table {
         return str.toString();
     }
 
+    public double[][] getFrequencyTable() {
+        return frequencyTable;
+    }
 }

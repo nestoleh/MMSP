@@ -9,6 +9,7 @@ import generators.turtle_generator.turtle_algorithms.TurtleAlgorithmParameters;
 import generators.turtle_generator.turtle_algorithms.TurtleAlgorithms;
 import intervals.EquivalentInterval;
 import intervals.IntervalInterface;
+import utils.WebContent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +17,11 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws IllegalAccessException, InstantiationException {
-
         start();
-
     }
 
-    public static WebContent start() {
-        WebContent webContent = new WebContent();
+    public static void start() {
+        // STEP 1-3: - generate data
         DataMMSP data = getData(3, TurtleAlgorithms.CHAIN.toString());
 
         // STEP 4: show your data
@@ -42,23 +41,19 @@ public class Main {
         // x-line
         IntervalRule intervalRule_x = interval.getIntervalRule();
         System.out.println("\nInterval X:");
-        webContent.intervalX = intervalRule_x.toWeb();
         System.out.println(intervalRule_x.toString());
         // y-line
         interval.setDiffrenceRange(differenceRanges.get(1));
         IntervalRule intervalRule_y = interval.getIntervalRule();
         System.out.println("Interval Y:");
-        webContent.intervalY = intervalRule_y.toWeb();
         System.out.println(intervalRule_y.toString());
 
         // STEP 7: generate alphabet line
         String line_x = intervalRule_x.generateAlphabetLine(differenceRanges.get(0).getRange());
         System.out.println("\nLINE X:");
         System.out.println(line_x);
-        webContent.lineX = line_x;
         String line_y = intervalRule_y.generateAlphabetLine(differenceRanges.get(1).getRange());
         System.out.println("LINE Y:");
-        webContent.lineY = line_y;
         System.out.println(line_y);
 
         // STEP 8: generate table
@@ -66,39 +61,33 @@ public class Main {
         Table table_x = new Table(Alphabet.SMALL_ENGLISH, line_x);
         System.out.println("\n TABLE X:");
         System.out.println(table_x.tableToString());
-        webContent.tableX = table_x.tableToString();
         // table y
         Table table_y = new Table(Alphabet.SMALL_ENGLISH, line_y);
         System.out.println("\n TABLE Y:");
         System.out.println(table_y.tableToString());
-        webContent.tableY = table_y.tableToString();
 
         // STEP 9: Frequency table
         System.out.println("\n Frequency TABLE X:");
         System.out.println(table_x.frequencyTableToString());
-        webContent.tableX = table_x.frequencyTableToString();
         System.out.println("\n Frequency TABLE Y:");
         System.out.println(table_y.frequencyTableToString());
-        webContent.tableX = table_y.frequencyTableToString();
 
         // STEP 10: generate lingua rules
         System.out.println("\n LINGUA RULES X:");
-        ArrayList<LinguaRule> x_rules= table_x.generateLinguaRules();
+        ArrayList<LinguaRule> x_rules = table_x.generateLinguaRules();
         x_rules.forEach(linguaRule -> {
-            if (linguaRule.getP() > 0){
+            if (linguaRule.getP() > 0) {
                 System.out.println(linguaRule.toString());
             }
         });
 
         System.out.println("\n LINGUA RULES Y:");
-        ArrayList<LinguaRule> y_rules= table_y.generateLinguaRules();
+        ArrayList<LinguaRule> y_rules = table_y.generateLinguaRules();
         y_rules.forEach(linguaRule -> {
-            if (linguaRule.getP() > 0){
+            if (linguaRule.getP() > 0) {
                 System.out.println(linguaRule.toString());
             }
         });
-
-        return webContent;
     }
 
     public static DataMMSP getData(int iterations, String algorithm) {

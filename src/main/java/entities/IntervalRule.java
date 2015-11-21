@@ -45,7 +45,7 @@ public class IntervalRule {
         StringBuilder str = new StringBuilder();
         for (IntervalItem item : rules){
             str.append(item.letter);
-            str.append("\tmin = "+item.min);
+            str.append(" => \tmin = "+item.min);
             str.append("\tmax = "+item.max+"<br>");
         }
         return str.toString();
