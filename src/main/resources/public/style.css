@@ -1,0 +1,39 @@
+html{
+   font-family: serif;
+}
+
+h1{
+    text-transform: uppercase;
+}
+
+h3{
+    text-transform: uppercase;
+}
+
+.answer{
+    background: #ccc;
+    font-family: monospace;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+table td{
+    border: 1px solid #000;
+    width: 25px;
+    height: 25px;
+    margin: 10px;
+    text-align: center;
+}
+
+table th, table .th{
+    background: #ccc;
+    font-weight: bold;
+    border: 1px solid #000;
+    text-align: center;
+    width: 25px;
+    height: 25px;
+}

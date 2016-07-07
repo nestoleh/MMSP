@@ -1,10 +1,7 @@
 package visual;
 
 import alphabets.Alphabet;
-import entities.DataMMSP;
-import entities.DifferenceRange;
-import entities.IntervalRule;
-import entities.Table;
+import entities.*;
 import generators.DataGeneratorInterface;
 import generators.DifferenceGenerator;
 import generators.turtle_generator.TurtleDataGenerator;
@@ -12,13 +9,19 @@ import generators.turtle_generator.turtle_algorithms.TurtleAlgorithmParameters;
 import generators.turtle_generator.turtle_algorithms.TurtleAlgorithms;
 import intervals.EquivalentInterval;
 import intervals.IntervalInterface;
+import utils.WebContent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) throws IllegalAccessException, InstantiationException {
+        start();
+    }
 
+    public static void start() {
+        // STEP 1-3: - generate data
         DataMMSP data = getData(3, TurtleAlgorithms.CHAIN.toString());
 
         // STEP 4: show your data
@@ -57,12 +60,34 @@ public class Main {
         // table x
         Table table_x = new Table(Alphabet.SMALL_ENGLISH, line_x);
         System.out.println("\n TABLE X:");
-        System.out.println(table_x.toString());
+        System.out.println(table_x.tableToString());
         // table y
         Table table_y = new Table(Alphabet.SMALL_ENGLISH, line_y);
         System.out.println("\n TABLE Y:");
-        System.out.println(table_y.toString());
+        System.out.println(table_y.tableToString());
 
+        // STEP 9: Frequency table
+        System.out.println("\n Frequency TABLE X:");
+        System.out.println(table_x.frequencyTableToString());
+        System.out.println("\n Frequency TABLE Y:");
+        System.out.println(table_y.frequencyTableToString());
+
+        // STEP 10: generate lingua rules
+        System.out.println("\n LINGUA RULES X:");
+        ArrayList<LinguaRule> x_rules = table_x.generateLinguaRules();
+        x_rules.forEach(linguaRule -> {
+            if (linguaRule.getP() > 0) {
+                System.out.println(linguaRule.toString());
+            }
+        });
+
+        System.out.println("\n LINGUA RULES Y:");
+        ArrayList<LinguaRule> y_rules = table_y.generateLinguaRules();
+        y_rules.forEach(linguaRule -> {
+            if (linguaRule.getP() > 0) {
+                System.out.println(linguaRule.toString());
+            }
+        });
     }
 
     public static DataMMSP getData(int iterations, String algorithm) {

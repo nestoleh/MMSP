@@ -41,6 +41,16 @@ public class IntervalRule {
         return str.toString();
     }
 
+    public String toWeb() {
+        StringBuilder str = new StringBuilder();
+        for (IntervalItem item : rules){
+            str.append(item.letter);
+            str.append(" => \tmin = "+item.min);
+            str.append("\tmax = "+item.max+"<br>");
+        }
+        return str.toString();
+    }
+
     private class IntervalItem {
         public double min;
         public double max;
